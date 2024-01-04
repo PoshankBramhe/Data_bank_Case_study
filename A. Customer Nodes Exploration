@@ -1,7 +1,49 @@
-<h2>Questions</h2>
+Questions:-
 1. How many unique nodes are there on the Data Bank system?
 2. What is the number of nodes per region?
 3. How many customers are allocated to each region?
 4. How many days on average are customers reallocated to a different node?
 5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
+
+
+
+Que1 - How many unique nodes are there on the Data Bank system?
+
+SELECT COUNT(DISTINCT node_id) as number_of_unique_nodes 
+FROM data_bank.customer_nodes;
+
+
+
+Que2 - What is the number of nodes per region?
+
+SELECT b.region_id,a.region_name,COUNT(node_id) as number_of_nodes 
+FROM data_bank.regions as a
+INNER JOIN data_bank.customer_nodes as b
+ON a.region_id = b.region_id
+GROUP BY b.region_id,a.region_name
+ORDER BY b.region_id;
+
+
+
+Que3 - How many customers are allocated to each region?
+
+SELECT b.region_id,a.region_name,COUNT(DISTINCT customer_id) as number_of_customers 
+FROM data_bank.regions as a
+INNER JOIN data_bank.customer_nodes as b
+ON a.region_id = b.region_id
+GROUP BY b.region_id,a.region_name
+ORDER BY b.region_id;
+
+
+
+Que4 - How many days on average are customers reallocated to a different node?
+
+SELECT AVG(DATEDIFF(end_date,start_date)) as avg_customers_reallocation 
+FROM data_bank.customer_nodes
+WHERE end_date <> '9999-12-31';
+
+
+
+Que5 - What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
+
 

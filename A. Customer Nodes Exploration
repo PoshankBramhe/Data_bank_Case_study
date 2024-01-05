@@ -11,7 +11,6 @@ Que1 - How many unique nodes are there on the Data Bank system?
 
 SELECT COUNT(DISTINCT node_id) as number_of_unique_nodes 
 FROM data_bank.customer_nodes;
-![Question 1](https://github.com/PoshankBramhe/Data_bank_Case_study/assets/154652656/f6c5d3cc-4cbf-48b7-83b5-fff01ef98877)
 
 
 
